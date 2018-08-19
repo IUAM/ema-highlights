@@ -12,6 +12,7 @@
     "devDependencies": {
         "bootstrap-sass": "3.3.6",
         "cross-env": "^5.1",
+        "fancybox": "2.1.5",
         "jquery": "1.12.4",
         "laravel-mix": "^2.0"
     }
