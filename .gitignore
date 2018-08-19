@@ -16,3 +16,5 @@ yarn-error.log
 # Custom rules
 /public/css
 /public/js
+/public/fonts
+/public/mix-manifest.json
