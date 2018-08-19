@@ -6,7 +6,6 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Notifications\Notifiable;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +13,7 @@ class User extends Model implements
     AuthenticatableContract,
     AuthorizableContract
 {
-    use Authenticatable, Authorizable, Notifiable;
+    use Authenticatable, Authorizable;
 
     /**
      * The attributes that are mass assignable.
