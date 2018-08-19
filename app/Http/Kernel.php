@@ -26,11 +26,11 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middlewareGroups = [
-        'web' => [
-            // Non-admin web routes are stateless
+        'admin' => [
+            // TODO: Make non-admin web routes stateless
         ],
 
-        'admin' => [
+        'web' => [
             \Illuminate\Cookie\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
