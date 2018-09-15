@@ -17,11 +17,13 @@ class DatabaseReset extends AbstractCommand
 
         if ($this->confirmReset()) {
 
-            $this->dropTables();
+            return $this->dropTables();
 
         } else {
 
             $this->info('Database reset command aborted. Whew!');
+
+            return 1;
 
         }
 
