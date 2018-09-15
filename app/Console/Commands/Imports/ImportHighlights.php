@@ -22,12 +22,20 @@ class ImportHighlights extends BaseCommand
 
     public function handle()
     {
+        // Answer yes if the schema has changed. Otherwise, this command is idempotent.
+        !$this->call('db:reset') ? $this->call('migrate') : null;
 
-        // Answer yes if the schema has changed. Otherwise, this is idempotent.
-        if (!$this->call('db:reset')) {
-            $this->call('migrate');
-        }
+        $this->importCategories();
+        $this->importEntries();
+        $this->importArtworks();
+        $this->importImages();
 
+        $this->setAutoIncrements();
+
+    }
+
+    private function importCategories()
+    {
         $this->import('entity_categories.csv', function ($row) {
 
             $category = Category::findOrNew($row['id']);
@@ -54,7 +62,10 @@ class ImportHighlights extends BaseCommand
             $category->save();
 
         });
+    }
 
+    private function importEntries()
+    {
         $this->import('entity_entries.csv', function ($row) {
 
             $entry = Entry::findOrNew($row['id']);
@@ -80,7 +91,10 @@ class ImportHighlights extends BaseCommand
             $entry->save();
 
         });
+    }
 
+    private function importArtworks()
+    {
         $this->import('entity_objects.csv', function ($row) {
 
             $artwork = Artwork::findOrNew($row['id']);
@@ -97,7 +111,10 @@ class ImportHighlights extends BaseCommand
             $artwork->save();
 
         });
+    }
 
+    private function importImages()
+    {
         $this->import('entity_images.csv', function ($row) {
 
             $image = Image::findOrNew($row['id']);
@@ -119,8 +136,11 @@ class ImportHighlights extends BaseCommand
             $image->save();
 
         });
+    }
 
-        // Set auto increment to one greater than the max id of each model
+    // Set auto increment to one greater than the max id of each model
+    private function setAutoIncrements()
+    {
         foreach([
             Category::class,
             Entry::class,
@@ -133,8 +153,8 @@ class ImportHighlights extends BaseCommand
         }
     }
 
-    private function import($filename, $rowCallback) {
-
+    private function import($filename, $rowCallback)
+    {
         $path = $this->getCsvPath($filename);
 
         $csv = Reader::createFromPath( $path, 'r' );
@@ -155,7 +175,6 @@ class ImportHighlights extends BaseCommand
 
             $this->info('Imported #' . $row['id'] . ' from ' . $filename);
         }
-
     }
 
     private function getCsvPath($filename)
