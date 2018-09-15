@@ -8,6 +8,7 @@ use App\Models\Image;
 use App\Models\Artwork;
 
 use League\Csv\Reader;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 use App\Console\Commands\AbstractCommand as BaseCommand;
@@ -119,7 +120,17 @@ class ImportHighlights extends BaseCommand
 
         });
 
-        // TODO: Set auto increment for each table
+        // Set auto increment to one greater than the max id of each model
+        foreach([
+            Category::class,
+            Entry::class,
+            Artwork::class,
+            Image::class,
+        ] as $model) {
+
+            $this->setAutoIncrement($model);
+
+        }
     }
 
     private function import($filename, $rowCallback) {
@@ -155,6 +166,14 @@ class ImportHighlights extends BaseCommand
     private function zeroToNull($value)
     {
         return $value == 0 ? null : $value;
+    }
+
+    private function setAutoIncrement($model)
+    {
+        $table = with(new $model)->getTable();
+        $newId = DB::table($table)->max('id') + 1;
+
+        DB::update("ALTER TABLE $table AUTO_INCREMENT = $newId;");
     }
 
 }
