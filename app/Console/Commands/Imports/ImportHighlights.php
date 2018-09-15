@@ -30,7 +30,7 @@ class ImportHighlights extends BaseCommand
         $this->importArtworks();
         $this->importImages();
 
-        $this->setAutoIncrements();
+        $this->setAutoIncrementForModels();
 
     }
 
@@ -138,8 +138,7 @@ class ImportHighlights extends BaseCommand
         });
     }
 
-    // Set auto increment to one greater than the max id of each model
-    private function setAutoIncrements()
+    private function setAutoIncrementForModels()
     {
         foreach([
             Category::class,
@@ -147,9 +146,8 @@ class ImportHighlights extends BaseCommand
             Artwork::class,
             Image::class,
         ] as $model) {
-
-            $this->setAutoIncrement($model);
-
+            $table = with(new $model)->getTable();
+            $this->setAutoIncrement($table);
         }
     }
 
@@ -187,9 +185,8 @@ class ImportHighlights extends BaseCommand
         return $value == 0 ? null : $value;
     }
 
-    private function setAutoIncrement($model)
+    private function setAutoIncrement($table)
     {
-        $table = with(new $model)->getTable();
         $newId = DB::table($table)->max('id') + 1;
 
         DB::update("ALTER TABLE $table AUTO_INCREMENT = $newId;");
