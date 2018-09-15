@@ -8,7 +8,7 @@ class Category extends AbstractModel
 {
 
     public function entries() {
-        return $this->belongsToMany(Entry::class, 'category_entry');
+        return $this->belongsToMany(Entry::class, 'category_entry')->withPivot('weight');
     }
 
 }

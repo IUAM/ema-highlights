@@ -13,7 +13,7 @@ class Entry extends AbstractModel
     ];
 
     public function categories() {
-        return $this->belongsToMany(Category::class, 'category_entry');
+        return $this->belongsToMany(Category::class, 'category_entry')->withPivot('weight');
     }
 
     public function artworks() {
