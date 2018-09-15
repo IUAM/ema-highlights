@@ -23,6 +23,7 @@ class ImportHighlights extends BaseCommand
     public function handle()
     {
         // Answer yes if the schema has changed. Otherwise, this command is idempotent.
+        // Assume it'll overwrite anything you edited since the last import, though.
         !$this->call('db:reset') ? $this->call('migrate') : null;
 
         $this->importCategories();
@@ -32,6 +33,9 @@ class ImportHighlights extends BaseCommand
 
         $this->setAutoIncrementForModels();
 
+        $this->syncCategoryEntry();
+        $this->syncEntryArtwork();
+        $this->syncArtworkImage();
     }
 
     private function importCategories()
@@ -138,6 +142,33 @@ class ImportHighlights extends BaseCommand
         });
     }
 
+    private function syncCategoryEntry()
+    {
+        $this->sync('xref_category_entry.csv', 'category_entry');
+    }
+
+    private function syncEntryArtwork()
+    {
+        $this->sync('xref_entry_object.csv', 'entry_artwork', function ($row) {
+            return [
+                'id' => (int) $row['id'],
+                'entry_id' => (int) $row['entry_id'],
+                'artwork_id' => (int) $row['object_id'],
+            ];
+        });
+    }
+
+    private function syncArtworkImage()
+    {
+        $this->sync('xref_object_image.csv', 'artwork_image', function ($row) {
+            return [
+                'id' => (int) $row['id'],
+                'artwork_id' => (int) $row['object_id'],
+                'image_id' => (int) $row['image_id'],
+            ];
+        });
+    }
+
     private function setAutoIncrementForModels()
     {
         foreach([
@@ -149,6 +180,21 @@ class ImportHighlights extends BaseCommand
             $table = with(new $model)->getTable();
             $this->setAutoIncrement($table);
         }
+    }
+
+    private function sync($filename, $pivotTable, $getPivotCallback = null)
+    {
+        $getPivotCallback = $getPivotCallback ?? function($row) {
+            return $row;
+        };
+
+        DB::table($pivotTable)->truncate();
+
+        $this->import($filename, function ($row) use ($pivotTable, $getPivotCallback) {
+            DB::table($pivotTable)->insert($getPivotCallback($row));
+        });
+
+        $this->setAutoIncrement($pivotTable);
     }
 
     private function import($filename, $rowCallback)
