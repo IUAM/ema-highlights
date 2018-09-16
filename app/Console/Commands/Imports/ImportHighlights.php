@@ -57,8 +57,8 @@ class ImportHighlights extends BaseCommand
             $category->tn_image_id = $this->zeroToNull($row['tn']);
             $category->tn_entry_id = $row['tn_entry'];
 
-            $category->description = $row['description'];
-            $category->description_md = $row['description_md'];
+            $category->description = $this->emptyToNull($row['description']);
+            $category->description_md = $this->emptyToNull($row['description_md']);
 
             $category->created_at = $row['created_at'];
             $category->updated_at = $row['updated_at'];
@@ -81,11 +81,11 @@ class ImportHighlights extends BaseCommand
             $entry->title = $row['title'];
             $entry->title_sort = $row['title_sort'];
 
-            $entry->tombstone = $row['tombstone'];
-            $entry->tombstone_md = $row['tombstone_md'];
+            $entry->tombstone = $this->emptyToNull($row['tombstone']);
+            $entry->tombstone_md = $this->emptyToNull($row['tombstone_md']);
 
-            $entry->description = $row['description'];
-            $entry->description_md = $row['description_md'];
+            $entry->description = $this->emptyToNull($row['description']);
+            $entry->description_md = $this->emptyToNull($row['description_md']);
 
             $entry->is_copyrighted = $row['copyrighted'];
 
@@ -229,6 +229,11 @@ class ImportHighlights extends BaseCommand
     private function zeroToNull($value)
     {
         return $value == 0 ? null : $value;
+    }
+
+    private function emptyToNull($value)
+    {
+        return $value == '' ? null : $value;
     }
 
     private function setAutoIncrement($table)
