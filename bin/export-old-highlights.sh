@@ -54,9 +54,8 @@ for TABLE in "${TABLES[@]}"; do
         FROM ${DB_NAME}.${TABLE}
         INTO OUTFILE '/tmp/${TABLE}.csv'
         FIELDS TERMINATED BY ','
-        ENCLOSED BY '\"'
-        ESCAPED BY '\\\\'
-        LINES TERMINATED BY '\n';
+        OPTIONALLY ENCLOSED BY '\"'
+        LINES TERMINATED BY '\r\n';
     "
 
     # https://stackoverflow.com/questions/10587615/unix-command-to-prepend-text-to-a-file
