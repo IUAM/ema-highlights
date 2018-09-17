@@ -1,0 +1,249 @@
+#branding-bar {
+
+    height: $branding-bar-height;
+
+    background-color: #7A1705;
+    border-top: 5px solid #990000;
+
+    // position: fixed;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 6;
+
+    img {
+        position: absolute;
+        top: -5px;
+        left: 0.9375rem;
+        width: 43px;
+        z-index: 9;
+    }
+
+    &:after {
+        content: "";
+        bottom: -$branding-bar-shadow;
+        position: absolute;
+        width: 100%;
+        height: $branding-bar-shadow;
+        background: transparentize( black, 0.8 );
+        z-index: 8;
+    }
+
+    #iu-campus {
+        font-family: BentonSansCondRegular, Arial, serif;
+        font-weight: normal;
+        color: #fff;
+        font-size: 18px;
+        float: left;
+        line-height: 45px;
+        margin: 0;
+        padding-left: 58px;
+        text-transform: uppercase;
+
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+    }
+
+    #branding-row {
+
+        padding-left: 0.9375rem;
+        padding-right: 0.9375rem;
+        width: 100%;
+
+        position: relative;
+
+        &:before, &:after {
+            content: "";
+            display: table;
+        }
+
+        &:after {
+            clear: both;
+        }
+    }
+
+    .show-on-desktop, .show-on-tablet, .show-on-mobile {
+        display: none;
+    }
+
+    $show-on-tablet: 280px;
+    $show-on-desktop: 410px;
+
+    @media ( max-width: $show-on-tablet - 1 ) {
+        .show-on-mobile {
+            display: block;
+        }
+    }
+
+    @media ( min-width: $show-on-tablet ) and ( max-width: $show-on-desktop - 1 ) {
+        .show-on-tablet {
+            display: block;
+        }
+    }
+
+    @media ( min-width: $show-on-desktop ) {
+        .show-on-desktop {
+            display: block;
+        }
+    }
+
+}
+
+#branding-bar img {
+    height: $branding-bar-height + $branding-bar-offset;
+    width: auto;
+}
+
+#footer {
+
+    $footer-padding: 10px;
+    $footer-border: 6px;
+
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    z-index: 6;
+
+    background-color: white;
+
+    font-family: BentonSansRegular, Arial, serif;
+    font-weight: normal;
+    text-align: center;
+
+    a {
+        color: #990000;
+    }
+
+    .signature {
+        text-align: center;
+
+        padding-top: $footer-padding;
+
+        .signature-link {
+            // background: url("images/iu-sig-formal.svg") no-repeat left top;
+            background-size: contain;
+            display: inline-block;
+            height: 0;
+            padding-top: 40px;
+            overflow: hidden;
+            width: 240px;
+        }
+
+    }
+
+    p {
+        line-height: 24px;
+        font-size: 12px;
+        margin: 0;
+        clear: left;
+    }
+
+    .tagline {
+
+        font-family: BentonSansCondBold, Arial, serif;
+        font-weight: normal;
+        -webkit-font-smoothing: antialiased;
+
+        background: #7A1705;
+        color: #fff;
+
+        // Bootstrap and other defaults make this impractical
+        // font-size: 1.375rem;
+        // line-height: 2.5rem;
+
+        font-size: 18px;
+        line-height: 1.5;
+
+        text-transform: uppercase;
+        // letter-spacing: 0.2em;
+        letter-spacing: 3px;
+
+        // margin: -24px -0.9375rem 24px -0.9375rem;
+        padding: 0 24px;
+
+        span {
+             font-family: GeorgiaProBoldItalic, Georgia, serif;
+             text-transform: lowercase;
+             font-size: 1rem;
+             vertical-align: 2px;
+             letter-spacing: 0;
+             margin-left: -4px;
+        }
+
+    }
+
+    @media screen and (max-width: 350px) {
+        .line-break-small {
+            display: block;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        .line-break {
+            display: block;
+        }
+        .hide-on-mobile {
+            display: none;
+        }
+    }
+
+    @media only screen and (min-width: 40em) {
+
+        padding-left: 0.9375rem;
+        padding-right: 0.9375rem;
+
+        border-top: $footer-border solid #7A1705;
+
+        padding-top: $footer-padding * 2;
+        padding-bottom: $footer-padding;
+
+        // We will account for sub-category mobile pagination via JS
+        // padding-bottom: $pagination-height-mobile + 10px;
+
+        .tagline {
+
+            position: absolute;
+            top: -($footer-padding * 2);
+            left: 50%;
+
+            // font-size: 1.5rem;
+            padding: 0 24px;
+
+            transform: translateX(-50%);
+
+        }
+
+        .signature {
+            padding-top: 0;
+        }
+
+    }
+
+    @media only screen and (min-width: 750px) {
+
+        padding-top: $footer-padding;
+
+        p {
+            line-height: 40px;
+        }
+
+        .signature {
+            float: left;
+            text-align: left;
+            height: 40px;
+        }
+
+        .copyright {
+            float: right;
+            clear: right;
+            text-align: right;
+        }
+
+    }
+
+}

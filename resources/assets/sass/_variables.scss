@@ -1,0 +1,29 @@
+$color-gray: #383637;
+$color-gray-dark: darken( $color-gray, 3% );
+$color-gray-light: #f7f7f7;
+
+$color-red-dark: #7A1705;
+$color-red: #990000;
+
+$branding-bar-height: 50px;
+$branding-bar-offset: 5px;
+$branding-bar-shadow: 3px;
+$branding-bar-height-mobile: $branding-bar-height;
+
+$topbar-height: 50px;
+
+$sidebar-width: 200px;
+$content-width: 760px ; // applies mainly to categories
+
+$splash-width: calc( 100% - #{$sidebar-width + $content-width} );
+
+// Aggressive breakpoint to account for scrollbar
+// $fixed-width: $sidebar-width + $content-width + 15px;
+$fixed-width: 1150px;
+// $fixed-width: 1270px;
+
+
+$topbar-height-mobile: 35px;
+$pagination-height-mobile: 40px;
+
+$padding: 10px;

@@ -1,0 +1,44 @@
+html {
+    height: 100%;
+}
+
+body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100%;
+    font-family: 'Lato', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+h1,h2,h3 {
+    vertical-align:middle;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    >.badge {
+        vertical-align:middle;
+        margin-top: -0.25em;
+    }
+
+}
+
+#main {
+
+    padding-bottom: 58px;
+    padding-top: $branding-bar-height;
+
+    // see _sidebar, _navigation, and _mobile
+    margin-left: $sidebar-width;
+
+}
+
+.fancybox-lock {
+
+    margin-right: 0 !important;
+
+    .fancybox-overlay {
+        overflow: hidden;
+    }
+}

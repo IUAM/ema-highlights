@@ -1,0 +1,58 @@
+// This affects pages that have a #splash element:
+//   index, category-top, category-sub
+// See also _index.scss and _category.scss
+
+.index, .category {
+
+    // required for #splash to fill full height
+    // height: 100%;
+
+    // position: relative;
+
+    #content {
+        width: $content-width;
+        // height: 100%;
+    }
+
+    #intro {
+
+        padding: 0 $padding*3;
+        // margin-bottom: $padding;
+
+        #title {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        #description {
+
+        }
+
+        h3 {
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+    }
+
+    #splash {
+        width: $splash-width;
+        // height: calc( 100% - #{$branding-bar-height} );
+        height: 100%;
+
+        position: fixed;
+        right: 0;
+        // top: $branding-bar-height;
+        top: 0;
+
+        background-color: $color-gray-light;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+
+        box-shadow: inset 10px 0 10px -10px transparentize(black, 0.6);
+
+        overflow: hidden;
+
+    }
+
+}

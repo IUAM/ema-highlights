@@ -1,0 +1,117 @@
+.category-top {
+
+    #categories {
+
+        padding: 0 $padding*3;
+
+        &:before, &:after {
+            content: "";
+            display: table;
+        }
+
+        &:after {
+            clear: both;
+        }
+
+        .item {
+            // position: relative;
+
+            width: 50%;
+            float: left;
+
+            padding: 15px 0;
+            font-size: 24px;
+            line-height: 0.8;
+            font-weight: 300;
+
+            overflow: hidden;
+            white-space: nowrap;
+
+            a {
+                display: block;
+                text-decoration: none;
+                color: $color-gray;
+
+                &:hover {
+                    color: $color-red;
+                }
+            }
+
+            img {
+                width: 50px;
+
+            }
+
+            img, p {
+                display: inline-block;
+            }
+
+            p {
+                // TODO: Add ellipsis?
+                // width: calc(100% - 50px);
+                // overflow: hidden;
+                // text-overflow: ellipsis;
+            }
+
+        }
+
+    }
+
+}
+
+.category-sub {
+
+    // To account for pagination
+    padding-top: $topbar-height;
+
+    #objects {
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        div {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .item {
+            position: relative;
+            display: block;
+
+            padding: $padding $padding * 3;
+
+            border-top: thin solid #dedede;
+            border-bottom: thin solid #eee;
+            background-color: #f5f5f5;
+
+            &.alt {
+                background-color: transparent;
+                border-top: none;
+                border-bottom: none;
+            }
+        }
+
+        $image-width: 150px;
+
+        .image {
+            text-align: center;
+            width: $image-width;
+        }
+
+        .tombstone {
+            padding-left: $padding;
+            font-size: 12px;
+            width: calc(100% - #{ $image-width + 5px } );
+
+            p {
+                margin-bottom: 0;
+            }
+        }
+
+    }
+
+    // See also _pagination.scss
+
+}
