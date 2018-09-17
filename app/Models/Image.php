@@ -8,7 +8,7 @@ class Image extends AbstractModel
 {
 
     public function artworks() {
-        return $this->belongsToMany(Artwork::class, 'entry_artwork');
+        return $this->belongsToMany(Artwork::class, 'artwork_image');
     }
 
 }
