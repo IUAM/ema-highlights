@@ -21,7 +21,7 @@ class EntryController extends Controller
         $out = [
             'entry' => $entry,
             'title' => $entry->title, // TODO: Add global title?
-            'breadcrumbs' => $this->getBreadcrumbs($entry),
+            // `breadcrumbs` are defined in AppServiceProvider
             'next' => $this->getAdjacentEntryLink($entry->getNextEntry()),
             'prev' => $this->getAdjacentEntryLink($entry->getPrevEntry()),
             'images' => $entry->artworks->pluck('images')->collapse(),
@@ -45,17 +45,6 @@ class EntryController extends Controller
             'accession' => $entry->accession,
             'image' => $image->getSquareThumbnail(),
             'href' => route('entry', $entry->id),
-        ];
-    }
-
-    private function getBreadcrumbs($entry)
-    {
-        return [
-            [
-                'id' => $entry->id,
-                'href' => route('entry', $entry->id),
-                'title' => $entry->accession,
-            ]
         ];
     }
 }
