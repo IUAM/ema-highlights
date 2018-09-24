@@ -18,3 +18,5 @@
 
 
 // Route::group(['prefix' => 'view'], function() {});
+
+Route::get('entries/{id}', 'EntryController@show')->name('entry');
