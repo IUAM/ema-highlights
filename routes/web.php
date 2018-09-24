@@ -20,3 +20,4 @@
 // Route::group(['prefix' => 'view'], function() {});
 
 Route::get('entries/{id}', 'EntryController@show')->name('entry');
+Route::get('categories/{id}', 'CategoryController@show')->name('category');

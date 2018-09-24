@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer([
             'entry',
+            'category-top',
         ], function($view) {
             $view->with('sidebar', $this->getSidebar());
         });
@@ -99,7 +100,7 @@ class AppServiceProvider extends ServiceProvider
         {
             $sidebarItems[] = [
                 'title' => $category->title_medium_safe,
-                'href' => null, // route('category', ['id' => $category->id]),
+                'href' => route('category', ['id' => $category->id]),
                 'is_current' => in_array($category->id, $this->getCurrentCategoryIds()),
                 'is_open' => in_array($category->id, $this->getOpenCategoryIds()),
                 'children' => $this->getSidebarItems($category->children),
@@ -121,7 +122,7 @@ class AppServiceProvider extends ServiceProvider
         {
             $breadcrumbs[] = [
                 "id" => $category_id,
-                "href" => null, // route('category', ['id' => $category_id]),
+                "href" => route('category', ['id' => $category_id]),
                 "title" => $categories->firstWhere('id', $category_id)->title,
             ];
         }
@@ -163,7 +164,10 @@ class AppServiceProvider extends ServiceProvider
             ])->pluck('id')->all();
         }
 
-        // TODO: Implement Route::is('category');
+        if (Route::is('category'))
+        {
+            return [Route::current()->parameter('id')];
+        }
 
         return [];
     }
