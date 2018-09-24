@@ -12,11 +12,13 @@ class Artwork extends AbstractModel
         'is_copyrighted' => 'boolean',
     ];
 
-    public function entries() {
+    public function entries()
+    {
         return $this->belongsToMany(Entry::class, 'entry_artwork');
     }
 
-    public function images() {
+    public function images()
+    {
         return $this->belongsToMany(Image::class, 'artwork_image');
     }
 

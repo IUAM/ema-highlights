@@ -12,11 +12,13 @@ class Entry extends AbstractModel
         'is_copyrighted' => 'boolean',
     ];
 
-    public function categories() {
+    public function categories()
+    {
         return $this->belongsToMany(Category::class, 'category_entry')->withPivot('weight');
     }
 
-    public function artworks() {
+    public function artworks()
+    {
         return $this->belongsToMany(Artwork::class, 'entry_artwork');
     }
 
