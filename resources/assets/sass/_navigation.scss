@@ -1,0 +1,69 @@
+.menu {
+    font-size: 12px;
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+}
+
+.menu-sidebar {
+
+    line-height: 1.8;
+
+    &, ul, li, a {
+        width: 100%;
+    }
+
+    // hide sub-categories unless active
+    > ul > li > ul > li > ul {
+        display: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.active {
+        display: block;
+    }
+
+    a {
+        display: block;
+        color: #d8d8d8;
+        padding: 0 $padding;
+    }
+
+    // indent subcategories
+    > ul > li > ul > li > ul > li > a {
+        padding-left: $padding * 2.5;
+    }
+
+    // add spacing below root node
+    > ul > li > a {
+        margin-bottom: $padding;
+    }
+
+    a:hover {
+        color: white;
+    }
+
+    a.active {
+        background-color: $color-gray-dark;
+        position: relative;
+
+        &:after {
+            position: absolute;
+            right: 0;
+            content: '';
+            font-size: 0;
+            border-style: solid;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent $color-gray-light transparent transparent;
+        }
+
+    }
+}

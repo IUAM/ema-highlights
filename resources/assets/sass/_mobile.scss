@@ -1,0 +1,290 @@
+.menu-sidebar {
+    height: calc( 100% - #{$topbar-height + $branding-bar-height + 50px} );
+}
+
+#pagination-desktop {
+    display: block;
+}
+
+#pagination-mobile {
+    display: none;
+}
+
+@media( max-width: $fixed-width ) {
+
+    #splash {
+        display: none;
+    }
+
+    .index #content, .category #content {
+        width: 100%;
+    }
+
+    .index #loader {
+        width: calc( 100% - #{$sidebar-width} );
+    }
+
+    #pagination {
+        width: calc( 100% - #{$sidebar-width} );
+    }
+
+}
+
+@media( max-width: 940px ) {
+
+    .category-top #categories .item {
+
+        font-size: 20px;
+
+        img {
+            width: 40px;
+        }
+    }
+
+}
+
+/* MOBILE MENU */
+@media( max-width: $content-width ) {
+
+    body {
+        font-size: 14px;
+    }
+
+    #mobile {
+        display: none;
+    }
+
+    #main {
+        margin-left: 0;
+        padding-top: $branding-bar-height-mobile + $topbar-height;
+    }
+
+    #branding-bar {
+        height: $branding-bar-height-mobile;
+        z-index: 6;
+
+        &:after {
+            display: none;
+        }
+
+        img {
+            height: $branding-bar-height-mobile;
+        }
+    }
+
+    #sidebar {
+
+        top: $branding-bar-height-mobile;
+
+        width: 100%;
+        height: auto;
+
+        // Higer than footer + sub-cat pagination
+        z-index: 8;
+
+        &.sticky {
+            top: 0;
+        }
+
+        #header {
+
+            height: $topbar-height;
+
+            #logo {
+                // margin-left: 0;
+                padding-top: $padding;
+            }
+
+            #hamburger {
+                display: block;
+            }
+
+        }
+
+        // Displayed via JavaScript
+        #menu, #search {
+            display: none;
+        }
+
+        #menu {
+            padding: 0;
+            height: auto;
+
+            margin-bottom: 34px;
+            border-bottom: 1px solid lighten( $color-gray, 8% );
+
+            ul {
+                margin: 0;
+            }
+
+            li a {
+
+                border-radius: 0;
+                border-top: 1px solid lighten( $color-gray, 8% );
+
+                padding-top: 6px;
+                padding-bottom: 6px;
+
+                margin: 0;
+
+            }
+        }
+
+        #search {
+            position: relative;
+        }
+    }
+
+    .index, .category {
+
+        #intro, #categories {
+            padding-left: $padding*1.5;
+            padding-right: $padding*1.5;
+        }
+
+    }
+
+    .category-sub #objects .item {
+        padding: $padding;
+    }
+
+    .category-sub {
+        padding-top: 0;
+    }
+
+    .index #loader {
+        width: 100%;
+    }
+
+    #pagination {
+
+        position: fixed;
+
+        top: initial;
+        bottom: 0;
+        width: 100%;
+        height: $pagination-height-mobile;
+        line-height: 0;
+
+        &.sticky {
+            top: initial;
+            z-index: 7;
+        }
+
+        #pagination-desktop {
+            display: none;
+        }
+
+        #pagination-mobile {
+            display: block;
+        }
+
+        #pagination-mobile-select {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .input-group * {
+            // display: table-cell;
+        }
+
+    }
+
+    #entry {
+        padding-top: 0;
+    }
+
+    #entry #breadcrumbs {
+
+        position: relative;
+
+        top: initial;
+        left: initial;
+
+        &.sticky {
+            position: relative;
+            top: initial;
+        }
+
+        width: 100%;
+
+        height: $topbar-height-mobile;
+        line-height: $topbar-height-mobile - 1px;
+
+        padding-top: 0;
+
+        #previous, #next {
+            .text {
+                display: none;
+            }
+        }
+
+    }
+
+
+}
+
+@media( max-width: 620px ) {
+
+    .category-top #categories .item {
+        width: 100%;
+    }
+
+}
+
+@media( max-width: 480px ) {
+
+
+
+    .category-sub #objects {
+
+        .item {
+            width: 100%;
+        }
+
+        .image {
+            width: 33%;
+        }
+
+        .tombstone {
+            width: 66%;
+        }
+    }
+
+}
+
+@media( max-width: 320px ) {
+
+    .category-sub #objects {
+
+        .image, .tombstone {
+            width: 100%;
+            display: block;
+        }
+
+        .image {
+            margin-bottom: $padding;
+        }
+
+        .tombstone {
+            padding-left: 0;
+        }
+
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+}
+
+// http://stackoverflow.com/questions/2989263/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+}

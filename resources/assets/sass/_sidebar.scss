@@ -1,0 +1,81 @@
+#sidebar {
+
+    background-color: $color-gray;
+
+    width: $sidebar-width;
+    height: calc( 100% - #{$branding-bar-height} );
+
+    position: absolute;
+    top: $branding-bar-height;
+    left: 0;
+
+    z-index: 5;
+
+    &.sticky {
+        position: fixed;
+        height: calc(100% + #{$branding-bar-offset});;
+        top: -$branding-bar-offset;
+    }
+
+    #header {
+
+        background-color: $color-gray-dark;
+        height: $topbar-height + $branding-bar-offset;
+
+        overflow-x: hidden;
+
+        position: relative;
+
+        #logo {
+            display: inline-block;
+            height: 100%;
+            padding: $padding;
+            padding-top: $padding + $branding-bar-offset;
+
+            img {
+                height: 100%;
+            }
+        }
+
+
+        #hamburger {
+
+            display: none;
+
+            padding: 9px #{ $padding + 3px };
+            font-size: 21px;
+            text-align: center;
+
+            color: white;
+            background-color: #990000;
+
+            position: fixed;
+            top: 0; right: 0;
+
+        }
+
+    }
+
+    #search {
+
+        padding: $padding;
+
+        background-color: $color-gray;
+
+        /*
+        input {
+            background-color:
+            border-color:
+            color:
+        }
+
+        button {
+            background-color:
+        }
+        */
+
+    }
+
+    // see _navigation for .menu
+
+}

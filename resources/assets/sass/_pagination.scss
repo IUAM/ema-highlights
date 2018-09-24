@@ -1,0 +1,60 @@
+#pagination {
+
+    width: $content-width;
+
+    position: absolute;
+    top: $branding-bar-height;
+
+    &.sticky {
+        position: fixed;
+        top: -$branding-bar-offset;
+    }
+
+    border-bottom: 1px solid #dedede;
+    background-color: #f5f5f5;
+
+    height: $topbar-height + $branding-bar-offset;
+    line-height: $topbar-height;
+
+    p {
+        display: inline-block;
+        vertical-align: middle;
+        margin-bottom: 0;
+    }
+
+    form {
+        padding: 5px 0;
+    }
+
+    form div,
+    form input {
+        display: inline-block;
+    }
+
+    .input-group {
+        width: auto;
+        * {
+            display: inline-block;
+        }
+    }
+
+    form .input-group-addon {
+        width: auto;
+        height: 30px;
+    }
+
+}
+
+.nav, .pagination, .carousel,
+.panel-title a { cursor: pointer; }
+
+.pagination {
+    margin: auto;
+    vertical-align: middle;
+    display: inline-block;
+
+    //position: absolute;
+    //left: 50%;
+    //top: 0;
+    //transform: translateX(-50%);
+}

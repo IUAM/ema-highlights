@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+// Currently, there are really only meant for local testing
+Route::get('{resource}', 'ApiController@index');
+Route::get('{resource}/{id}', 'ApiController@show');

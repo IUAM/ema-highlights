@@ -1,0 +1,205 @@
+#entry {
+
+    padding-top: $topbar-height + $branding-bar-offset;
+    padding-bottom: 15px;
+
+    .image-main {
+
+        position: relative;
+
+        background: $color-gray-light;
+        box-shadow: inset 0 -10px 10px -10px darken($color-gray-light, 12.5%);
+
+        height: 500px;
+
+        a {
+            display: block;
+            height: 100%;
+        }
+
+        img {
+
+            max-height: 100%;
+            max-width: 100%;
+            padding: 15px 10px;
+
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translateY(-50%) translateX(-50%);
+
+        }
+    }
+
+    .image-gallery {
+        margin: 20px 0;
+        text-align: center;
+        img {
+            padding: 5px;
+            border: 1px solid #eee;
+            width: 60px;
+        }
+    }
+
+    .title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .text-muted {
+        p {
+            font-size: 0.8em;
+            margin: 0;
+        }
+    }
+
+    #breadcrumbs {
+
+        background-color: #f1f1f1;
+        color: #909090;
+
+        font-size: 12px;
+
+        position: absolute;
+        top: $branding-bar-height;
+        left: $sidebar-width;
+
+        &.sticky {
+            position: fixed;
+            top: -$branding-bar-offset;
+        }
+
+        width: calc( 100% - #{$sidebar-width} );
+        z-index: 2;
+
+        padding: 0 $padding;
+
+        height: $topbar-height + $branding-bar-offset;
+        padding-top: $branding-bar-shadow;
+
+        // Adjusted in _mobile.scss
+        line-height: $topbar-height - 2px;
+        overflow: hidden;
+
+        a, a:active, a:hover {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .breadcrumb {
+            margin-bottom: 0;
+
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+
+            padding: 0;
+
+            > li {
+
+                // Hide until revealed by @media
+                display: none;
+
+                // Don't show delimiters by default
+                + li:before {
+                    display: none;
+                }
+
+                // Only @media's where min-width is used
+
+                @media( min-width: 280px ) {
+                    &:nth-last-child(2) {
+                        display: inline-block;
+                    }
+                }
+
+                @media( min-width: 400px ) {
+                    &:nth-last-child(3) {
+                        display: inline-block;
+                    }
+                    &:nth-last-child(2):before {
+                        display: inline;
+                    }
+                }
+
+                @media( min-width: 500px ) {
+                    &:nth-last-child(4) {
+                        display: inline-block;
+                    }
+                    &:nth-last-child(3):before {
+                        display: inline;
+                    }
+                }
+
+                @media( min-width: 600px ) {
+                    &:nth-last-child(1) {
+                        display: inline-block;
+                    }
+                    &:nth-last-child(1):before {
+                        display: inline;
+                    }
+                }
+
+                // See _mobile.scss for more context
+                @media( min-width: $content-width ) {
+                    &:nth-last-child(1),
+                    &:nth-last-child(4) {
+                        display: none;
+                    }
+                    &:nth-last-child(1):before,
+                    &:nth-last-child(3):before {
+                        display: none;
+                    }
+                }
+
+                @media( min-width: 800px ) {
+                    &:nth-last-child(1) {
+                        display: inline-block;
+                    }
+                    &:nth-last-child(1):before {
+                        display: inline;
+                    }
+                }
+
+                @media( min-width: 880px ) {
+                    &:nth-last-child(4) {
+                        display: inline-block;
+                    }
+                    &:nth-last-child(3):before {
+                        display: inline;
+                    }
+                }
+
+            }
+
+            > .active {
+            }
+
+        }
+
+        #previous, #next {
+            &, a, img {
+                height: 100%;
+                display: inline-block;
+            }
+        }
+
+        #previous {
+            float: left;
+
+            a, img {
+                padding-right: $padding;
+            }
+        }
+
+        #next {
+            float: right;
+
+            a, img {
+                padding-left: $padding;
+            }
+        }
+
+    }
+
+}
