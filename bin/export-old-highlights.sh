@@ -3,7 +3,7 @@
 # In Homestead, you may need to run this command using sudo
 
 # TODO: Abstract this script to accept these as arguments?
-DB_NAME='ema_highlights_old'
+DB_NAME='iuam_highlights'
 DUMPS_SUBDIR='highlights'
 
 # https://stackoverflow.com/questions/59895/getting-the-source-directory-of-a-bash-script-from-within
