@@ -78,6 +78,10 @@
 
     @if (isset($sidebar))
     <div id="menu" class="menu menu-sidebar">
+        @include('partials.sidebar', [
+            'items' => $sidebar,
+            'is_open' => true,
+        ])
         <ul>
             <li>
                 <a href="view/rights">Rights & Reproductions</a>

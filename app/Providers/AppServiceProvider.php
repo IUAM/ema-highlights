@@ -2,10 +2,25 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use App\Models\Entry;
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+
+    /**
+     * To reduce database requests, we cache some properties here.
+     */
+    private $categories;
+
+    private $currentCategoryIds;
+
+    private $openCategoryIds;
+
     /**
      * Bootstrap any application services.
      *
@@ -13,7 +28,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::composer([
+            'entry',
+        ], function($view) {
+            $view->with('sidebar', $this->getSidebar());
+        });
     }
 
     /**
@@ -25,4 +44,106 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
+    /**
+     * Helper method to prevent needless queries.
+     */
+    private function getCategories()
+    {
+        return $this->categories ?? $this->categories = Category::all();
+    }
+
+    private function getCurrentCategoryIds()
+    {
+        return $this->currentCategoryIds ?? $this->currentCategoryIds = $this->initCurrentCategoryIds();
+    }
+
+    private function getOpenCategoryIds()
+    {
+        return $this->openCategoryIds ?? $this->openCategoryIds = $this->initOpenCategoryIds();
+    }
+
+    /**
+     * Retrieve category collection, nest them via `children`, and transform them
+     * into a nested array suitable for use in the `sidebar` view.
+     */
+    private function getSidebar()
+    {
+        // Tranform our flat category collection into a nested array
+        $categories = $this->getCategories();
+        $nestedCategories = Category::getAllNested($categories);
+
+        // Transform nested array to have only the fields we need to render each item
+        $sidebar = $this->getSidebarItems($nestedCategories);
+
+        return $sidebar;
+    }
+
+    /**
+     * Separating this method out due to its recursive nature.
+     */
+    private function getSidebarItems($nestedCategories)
+    {
+        foreach ($nestedCategories as $category)
+        {
+            $sidebarItems[] = [
+                'title' => $category->title_medium_safe,
+                'href' => null, // route('category', ['id' => $category->id]),
+                'is_current' => in_array($category->id, $this->getCurrentCategoryIds()),
+                'is_open' => in_array($category->id, $this->getOpenCategoryIds()),
+                'children' => $this->getSidebarItems($category->children),
+            ];
+        }
+
+        return $sidebarItems ?? [];
+    }
+
+    /**
+     * This function determines which sidebar items represent the current categories.
+     *
+     * Currently, this determines which `<a/>` items get the `.active` class applied
+     * to them, which gives them a small, off-gray triangle indicator.
+     *
+     * Entries might be located in multiple categories. Multiple categories may
+     * qualify as "current" at the same time.
+     *
+     * This returns an array of category ids.
+     *
+     * @return array[integer]
+     */
+    private function initCurrentCategoryIds()
+    {
+        if (Route::is('entry'))
+        {
+            $entry_id = Route::current()->parameter('id');
+            $entry = Entry::findOrFail($entry_id);
+
+            return $entry->categories()->get([
+                'categories.id',
+                'categories.category_id'
+            ])->pluck('id')->all();
+        }
+
+        // TODO: Implement Route::is('category');
+
+        return [];
+    }
+
+    /**
+     * For ancestors of the current category, we need to set `.active` on the `<ul/>`, but not the `<a/>`.
+     */
+    private function initOpenCategoryIds()
+    {
+        foreach ($this->getCurrentCategoryIds() as $current_category_id)
+        {
+            do
+            {
+                $active_category_ids[] = $current_category_id;
+                $current_category_id = $this->getCategories()->firstWhere('id', $current_category_id)->category_id;
+            } while(isset($current_category_id));
+        }
+
+        return array_reverse($active_category_ids);
+    }
+
 }
