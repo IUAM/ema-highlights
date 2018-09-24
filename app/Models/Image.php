@@ -31,14 +31,19 @@ class Image extends AbstractModel
         return $aspect;
     }
 
-    public function getFull()
+    public function getFull($id = null)
+    {
+        return asset('storage/objects/full/' . ($id ?? $this->id) . '.jpg');
+    }
+
+
+    public function getSquareThumbnail($id = null)
+    {
+        return asset('storage/objects/sq/' . ($id ?? $this->id) . '.jpg');
+    }
+
+    public function getFullSafe()
     {
         return asset('storage/objects/' . ($this->is_copyrighted ? 'tn' : 'full') . '/' . $this->id . '.jpg');
     }
-
-    public function getSquareThumbnail()
-    {
-        return asset('storage/objects/sq/' . $this->id . '.jpg');
-    }
-
 }

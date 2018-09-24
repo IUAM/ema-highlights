@@ -33,11 +33,11 @@
     </div>
 
     <div class="image-main" data-ratio="{{ $images->first()->aspect }}">
-        <img src="{!! $images->shift()->getFull(); !!}">
+        <img src="{!! $images->shift()->getFullSafe(); !!}">
     </div>
     <div class="image-gallery">
         @foreach ($images as $image)
-            <a class="fancybox" rel="group" href="{!! $image->getFull() !!}">
+            <a class="fancybox" rel="group" href="{!! $image->getFullSafe() !!}">
                 <img style="max-width: 100%;" src="{!! $image->getSquareThumbnail() !!}">
             </a>
         @endforeach
