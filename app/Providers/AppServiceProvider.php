@@ -33,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer([
             'entry',
             'category-top',
+            'category-sub',
         ], function($view) {
             $view->with('sidebar', $this->getSidebar());
         });

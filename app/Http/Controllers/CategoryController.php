@@ -20,7 +20,7 @@ class CategoryController extends Controller
         // This assumes that categories only nest one level deep...
         if (!$category->children()->exists())
         {
-            return;
+            return $this->showSubCategory($category);
         }
 
         $out = [
@@ -30,6 +30,21 @@ class CategoryController extends Controller
         ];
 
         return view('category-top', $out);
-
     }
+
+    private function showSubCategory($category)
+    {
+        $entries = $category->entries()->with('artworks', 'artworks.images')->paginate(20);
+
+        $out = [
+            'title' => $category->title,
+            'category' => $category,
+            'entries' => $entries,
+        ];
+
+        // return $out;
+
+        return view('category-sub', $out);
+    }
+
 }
