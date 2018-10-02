@@ -19,6 +19,8 @@
 
 // Route::group(['prefix' => 'view'], function() {});
 
+Route::redirect('categories/1', '/');
+
 Route::get('entries/{id}', 'EntryController@show')->name('entry');
 Route::get('categories/{id}', 'CategoryController@show')->name('category');
 
