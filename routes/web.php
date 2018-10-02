@@ -21,3 +21,6 @@
 
 Route::get('entries/{id}', 'EntryController@show')->name('entry');
 Route::get('categories/{id}', 'CategoryController@show')->name('category');
+
+Route::get('/', 'HomeController@home')->name('home');
+Route::get('random/{page}', 'HomeController@random')->name('random');

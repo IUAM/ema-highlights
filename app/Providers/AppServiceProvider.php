@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer([
+            'home',
             'entry',
             'category-top',
             'category-sub',
@@ -168,6 +169,11 @@ class AppServiceProvider extends ServiceProvider
         if (Route::is('category'))
         {
             return [Route::current()->parameter('id')];
+        }
+
+        if (Route::is('home'))
+        {
+            return [1];
         }
 
         return [];

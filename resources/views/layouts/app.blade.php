@@ -15,7 +15,7 @@
     <base href="{!! config('app.url') !!}" />
 
     <!-- Scripts -->
-    <script src="{{ asset('js/vendor.js') }}" defer></script>
+    <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
