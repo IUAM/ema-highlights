@@ -4,9 +4,19 @@ namespace App\Models;
 
 use App\Models\Category;
 use App\Models\Artwork;
+use App\Models\Behaviors\FullTextSearchable;
 
 class Entry extends AbstractModel
 {
+    use FullTextSearchable;
+
+    /**
+     * The columns of the full text index
+     */
+    protected $searchable = [
+        'tombstone',
+        'description',
+    ];
 
     protected $casts = [
         'is_copyrighted' => 'boolean',

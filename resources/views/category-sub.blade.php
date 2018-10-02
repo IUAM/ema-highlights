@@ -13,7 +13,7 @@
 
         <div id="intro">
 
-            <h2 id="title">{{ $category->title }}</h2>
+            <h2 id="title">{!! $category->title !!}</h2>
             <div id="description">
 
             @if (!isset($category->description))
@@ -69,7 +69,7 @@
                         @for ($i=1; $i <= $entries->lastPage() ; $i++)
                         <li class="{{ $entries->currentPage() === $i ? 'active' : '' }}">
                             {{-- TODO: Add back $q passthrough --}}
-                            <a href="{!! url()->current() . "?page={$i}" !!}">{{ $i }}</a>
+                            <a href="{!! $entries->url($i) !!}">{{ $i }}</a>
                         </li>
                         @endfor
 

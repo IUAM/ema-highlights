@@ -36,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
             'category-top',
             'category-sub',
             'rights',
+            'search',
         ], function($view) {
             $view->with('sidebar', $this->getSidebar());
         });

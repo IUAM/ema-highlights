@@ -67,7 +67,7 @@
 
     </div>
 
-    <form id="search" action="view/search" method="get">
+    <form id="search" action="{!! route('search') !!}" method="get">
         <div class="input-group">
             <input type="text" class="form-control input-sm" placeholder="Search the collection" name="q">
             <span class="input-group-btn">
