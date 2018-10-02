@@ -84,7 +84,10 @@
         ])
         <ul>
             <li>
-                <a href="view/rights">Rights & Reproductions</a>
+                <a
+                    href="{!! route('rights') !!}"
+                    class="{!! url()->current() === route('rights') ? 'active' : '' !!}"
+                >Rights & Reproductions</a>
             </li>
         </ul>
     </div>

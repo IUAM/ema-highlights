@@ -24,3 +24,7 @@ Route::get('categories/{id}', 'CategoryController@show')->name('category');
 
 Route::get('/', 'HomeController@home')->name('home');
 Route::get('random/{page}', 'HomeController@random')->name('random');
+
+Route::view('rights', 'rights', [
+    'background' => with(new \App\Models\Image)->getFull(372),
+])->name('rights');

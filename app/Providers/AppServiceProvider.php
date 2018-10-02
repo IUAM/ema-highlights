@@ -35,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
             'entry',
             'category-top',
             'category-sub',
+            'rights',
         ], function($view) {
             $view->with('sidebar', $this->getSidebar());
         });
@@ -184,6 +185,7 @@ class AppServiceProvider extends ServiceProvider
      */
     private function initOpenCategoryIds()
     {
+        $active_category_ids = [];
         foreach ($this->getCurrentCategoryIds() as $current_category_id)
         {
             do
